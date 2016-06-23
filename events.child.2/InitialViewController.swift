@@ -64,6 +64,7 @@ class InitialViewController : UIViewController {
         super.viewDidLoad()
         hideBackground()
         includeLogos()
+        print("HI CASEY FROM GIT")
     }
     
     override func viewDidAppear(animated: Bool) {
