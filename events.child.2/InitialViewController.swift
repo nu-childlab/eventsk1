@@ -37,7 +37,7 @@ class InitialViewController : UIViewController {
     }
     
     func backgroundFadeIn() {
-        UIView.animateWithDuration(5.0, delay: 3.0, options: .CurveEaseOut, animations: {self.whiteView.alpha = 0}, completion: {_ in
+        UIView.animateWithDuration(4.0, delay: 2.0, options: .CurveEaseOut, animations: {self.whiteView.alpha = 0}, completion: {_ in
             self.backgroundView = self.whiteView
             self.whiteView.removeFromSuperview()
             
@@ -64,7 +64,6 @@ class InitialViewController : UIViewController {
         super.viewDidLoad()
         hideBackground()
         includeLogos()
-        print("HI CASEY FROM GIT")
     }
     
     override func viewDidAppear(animated: Bool) {
