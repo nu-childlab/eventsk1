@@ -179,7 +179,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ZzB-JT-VF2">
-                        <barButtonItem key="backBarButtonItem" title="Restart Trial" id="RIJ-Ar-Mrv"/>
+                        <barButtonItem key="backBarButtonItem" title="Restart Trial" id="RIJ-Ar-Mrv">
+                            <connections>
+                                <action selector="restartTrial:" destination="eEQ-NC-ZuA" id="gQh-4y-eqO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bananaDisplay" destination="N9V-aJ-gmt" id="Bnk-nN-66l"/>
@@ -259,6 +263,13 @@
                             <constraint firstItem="5BN-bb-tEM" firstAttribute="leading" secondItem="ltM-nm-gWW" secondAttribute="leading" id="Sm0-DA-OSo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="sqp-bA-gii">
+                        <barButtonItem key="backBarButtonItem" title="Restart Trial" id="ZRa-nO-i14">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="kut-Kf-lCb" id="qar-NQ-1Ij"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="advanceWithout" destination="CHN-Oh-K1T" id="EXQ-eK-F7d"/>
                         <outlet property="monkey1" destination="iTS-DN-4qF" id="uMh-g4-tHU"/>
@@ -270,7 +281,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oa0-T5-YW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0bA-ci-b5f" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4019" y="-339"/>
+            <point key="canvasLocation" x="4019" y="-328"/>
         </scene>
         <!--End Experiment Controller-->
         <scene sceneID="RnV-Pg-ISi">

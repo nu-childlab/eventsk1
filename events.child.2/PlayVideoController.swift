@@ -196,7 +196,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     //used to create unwind segue from response controller
     @IBAction func unwindToPlayVideo (segue: UIStoryboardSegue) {
     }
-
+    
     
     //MARK: View Lifecycle
     
@@ -204,6 +204,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(true)
         updateBananaScore()
     }
+
 
 }
 

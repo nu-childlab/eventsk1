@@ -167,6 +167,7 @@ class ResponseController : UIViewController {
         }
     }
     
+    
     //MARK: Physics 
     
     func addBananaPhysics() {
@@ -187,6 +188,9 @@ class ResponseController : UIViewController {
         animator.addBehavior(elasticity)
         
     }
+    
+   
+
     
     //MARK: View Lifecycle
     
