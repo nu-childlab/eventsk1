@@ -7,7 +7,7 @@
 //
 
 
-/* symmetrical gradient required on response screen so there's no chance of biasing kids towards one monkey over another as the correct answer
+/* symmetrical gradient so there's no chance of biasing kids towards one monkey over another as the correct answer
  */
 
 

@@ -75,7 +75,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         } else {
             order = 1
         }
-        //Switch stimuli array based on order value
+        //Switch stimuli array and update DB based on order value
         switch order {
             case 0:
             videos = orderA
@@ -84,6 +84,20 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             default:
             videos = orderA
         }
+    }
+    
+    //To show still image of monkeys in childVC, to be called the first time this view loads
+    func meetMonkeys(){
+        
+        
+        //initialize AVPlayerVC
+        //presenting as VC and not automatic subview bc we want ability to replay
+        player = AVPlayer(URL: url)
+        playerController = AVPlayerViewController()
+        playerController.player = player
+        self.presentViewController(playerController, animated: true, completion: nil)
+        
+        player.play()
     }
     
     //To play video via AVPlayerViewController (PlayerLayer was too glitchy and slow)
@@ -119,7 +133,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         player.play()
     }
     
-    //To populate database with #s,heights,durations in video filename
+    //To populate database with #s,heights,durations in video filename. Could be achieved more concisely but I think this is more intuitive. 
     func newTrial() {
         let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
         let fileNameArr = fileName!.componentsSeparatedByString("_")
@@ -132,6 +146,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             
             newSubject.subjectNumber = subject.subjectNumber //populate fields
             newSubject.condition = subject.condition
+            
+            subject.order = order
+            newSubject.order = subject.order
+            
             newSubject.trialNumber = i + 1
             
             realm.add(newSubject)

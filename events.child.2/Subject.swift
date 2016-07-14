@@ -13,6 +13,7 @@ class Subject: Object {
 
     dynamic var subjectNumber = ""
     dynamic var condition = ""
+    dynamic var order = 0 //odd s# corresponds to order 0 
     dynamic var created = NSDate()
     dynamic var trialNumber = 0
     dynamic var Anumber = ""

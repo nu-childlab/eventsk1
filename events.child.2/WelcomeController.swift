@@ -93,7 +93,6 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         self.subject = newSubject //assign it to our subject var
     }
 
-
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
