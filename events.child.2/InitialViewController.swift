@@ -16,7 +16,10 @@ class InitialViewController : UIViewController {
     
     @IBOutlet weak var backgroundView: UIView!
     
-    func coverBackground() {
+    
+    //MARK: View Setup
+    
+    func coverBackgroundWhite() {
         whiteView = UIView(frame: self.view.frame)
         whiteView.backgroundColor = UIColor.whiteColor()
         whiteView.alpha = 1
@@ -54,21 +57,18 @@ class InitialViewController : UIViewController {
             
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 
-                self.performSegueWithIdentifier("toWelcome", sender: self)
-                
-            })
-        
-            }
-        )
-    }
+                self.performSegueWithIdentifier("toWelcome", sender: self
+                )}
+            )}
+        )}
+    
+    //MARK: Logo Animation
     
     func rotateLogos(){
         UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: {self.cldlLogo.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))}, completion: nil)
          UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: {self.nuLogo.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))}, completion: nil)
 
     }
-    
-    //MARK: Logo Animation
     
     func squishLogos(){
         UIView.animateWithDuration(0.7, delay: 3.0, options: .CurveEaseOut, animations: {
@@ -82,16 +82,17 @@ class InitialViewController : UIViewController {
     }
     
     func fadeLogos(){
-        UIView.animateWithDuration(2.0, delay: 2.4, options: .CurveEaseInOut, animations: {self.cldlLogo.alpha = 0.0}, completion: {finished in
+        UIView.animateWithDuration(2.0, delay: 2.0, options: .CurveEaseInOut, animations: {self.cldlLogo.alpha = 0.0}, completion: {finished in
             self.cldlLogo.removeFromSuperview()})
-        UIView.animateWithDuration(2.0, delay: 2.4, options: .CurveEaseInOut, animations: {self.nuLogo.alpha = 0.0}, completion: {finished in
+        UIView.animateWithDuration(2.0, delay: 2.0, options: .CurveEaseInOut, animations: {self.nuLogo.alpha = 0.0}, completion: {finished in
             self.nuLogo.removeFromSuperview()})
     }
 
+    //MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coverBackground()
+        coverBackgroundWhite()
         includeLogos()
     }
     
