@@ -1,0 +1,58 @@
+//
+//  MeetMonkeysController.swift
+//  events.child.2
+//
+//  Created by Casey Colby on 7/20/16.
+//  Copyright © 2016 Casey Colby. All rights reserved.
+//
+
+import UIKit
+
+class MeetMonkeysController: UIViewController {
+    
+    var subject: Subject! //receives subject instance from WelcomeController
+    @IBOutlet weak var OrangeMonkey: UIImageView!
+    @IBOutlet weak var PurpleMonkey: UIImageView!
+    @IBOutlet weak var gestureInstruction: UILabel!
+      @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var longPressRecognizer: UILongPressGestureRecognizer!
+   
+    //MARK: Actions
+    
+    @IBAction func beginGame(sender: UILongPressGestureRecognizer) {
+        OrangeMonkey.hidden = false
+        PurpleMonkey.hidden = false
+        gestureInstruction.hidden = false
+        gestureInstruction.text = "tap anywhere to continue"
+        longPressRecognizer.enabled = false
+        tapGestureRecognizer.enabled = true
+        
+    }
+    
+    //MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let navVC = segue.destinationViewController as! UINavigationController
+        
+        if let destination = navVC.viewControllers.first as? PlayVideoController {
+            destination.subject = self.subject //pass subject instance to PlayVideoController
+        }
+    }
+    
+    //MARK: View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        OrangeMonkey.hidden = true
+        PurpleMonkey.hidden = true
+        gestureInstruction.text = "press and hold to enter"
+        gestureInstruction.hidden = false
+        tapGestureRecognizer.enabled = false
+        longPressRecognizer.enabled = true
+
+    }
+    
+}
+
+

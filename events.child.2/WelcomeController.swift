@@ -72,7 +72,7 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
             self.conditionText = "\((alertController.textFields![1] as UITextField).text!)"
             
             if self.validateFields() { //require that all fields are filled before segue is called
-                self.performSegueWithIdentifier("enterExperiment", sender: self) //manually segue when save button pressed
+                self.performSegueWithIdentifier("toMeetMonkeys", sender: self) //manually segue when save button pressed
             }
         })
         
@@ -108,13 +108,12 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     //MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "enterExperiment" {
+        if segue.identifier == "toMeetMonkeys" {
             getSubject() //store subject info in var to pass to VCs
         }
+    
         
-        let navVC = segue.destinationViewController as! UINavigationController
-        
-        if let destination = navVC.viewControllers.first as? PlayVideoController {
+        if let destination = segue.destinationViewController as? MeetMonkeysController {
             destination.subject = self.subject //pass subject instance to PVC
         }
     }

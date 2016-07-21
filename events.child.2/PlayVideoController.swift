@@ -42,7 +42,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     //MARK: Actions
     
-    //To select ordered stimuli
+    //To select ordered stimuli 
     func selectStimuliOrder() {
         
         let lastCh = subject.subjectNumber[subject.subjectNumber.endIndex.predecessor()]//last character of subject number
@@ -86,20 +86,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    //To show still image of monkeys in childVC, to be called the first time this view loads
-    func meetMonkeys(){
-        
-        
-        //initialize AVPlayerVC
-        //presenting as VC and not automatic subview bc we want ability to replay
-        player = AVPlayer(URL: url)
-        playerController = AVPlayerViewController()
-        playerController.player = player
-        self.presentViewController(playerController, animated: true, completion: nil)
-        
-        player.play()
-    }
-    
     //To play video via AVPlayerViewController (PlayerLayer was too glitchy and slow)
     func playVideo(){
         //setup
@@ -133,7 +119,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         player.play()
     }
     
-    //To populate database with #s,heights,durations in video filename. Could be achieved more concisely but I think this is more intuitive. 
+    //To populate database with #s,heights,durations in video filename. Could be achieved more concisely but less clearly.
     func newTrial() {
         let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
         let fileNameArr = fileName!.componentsSeparatedByString("_")
@@ -178,7 +164,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
                 newTrial() //4
                 self.performSegueWithIdentifier("toResponse", sender: self) //5
             } else {
-                self.performSegueWithIdentifier("endExperiment", sender: self) //6
+                self.performSegueWithIdentifier("toEndExperiment", sender: self) //6
             }
         }
     }
@@ -217,6 +203,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     
     //MARK: View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)

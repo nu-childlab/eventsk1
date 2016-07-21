@@ -138,7 +138,7 @@ class ResponseController : UIViewController {
                 }
             }
             timer.invalidate()
-            self.performSegueWithIdentifier("continueExperiment", sender: self)
+            self.performSegueWithIdentifier("tocontinuePlayVideo", sender: self)
         }
         t+=1
     }
@@ -154,7 +154,7 @@ class ResponseController : UIViewController {
             }
         } else {
         //update database for test trials
-            if segue.identifier == "continueExperiment"  {
+            if segue.identifier == "tocontinuePlayVideo"  {
                 i+=1
                 updateResponse() //save to db
             }

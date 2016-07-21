@@ -1,5 +1,5 @@
 //
-//  InitialViewController.swift
+//  LoadingViewController.swift
 //  events.child.2
 //
 //  Created by Casey Colby on 6/19/16.
@@ -8,9 +8,11 @@
 
 import UIKit
 
-class InitialViewController : UIViewController {
+class LoadingViewController : UIViewController {
     
     var whiteView: UIView!
+    var blur: UIBlurEffect!
+    var blurView: UIVisualEffectView!
     var cldlLogo: UIImageView!
     var nuLogo: UIImageView!
     
@@ -24,6 +26,13 @@ class InitialViewController : UIViewController {
         whiteView.backgroundColor = UIColor.whiteColor()
         whiteView.alpha = 1
         view.insertSubview(whiteView, aboveSubview: backgroundView)
+        
+        blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.insertSubview(blurView, aboveSubview: backgroundView)
+        
     }
     
     func includeLogos() {

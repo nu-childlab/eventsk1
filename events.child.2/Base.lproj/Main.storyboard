@@ -29,12 +29,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgz-a8-nDP">
-                                            <rect key="frame" x="27" y="109" width="546" height="239"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="200"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8F-5w-Ky9">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Qor-TX-pxv">
@@ -54,6 +48,12 @@
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgz-a8-nDP">
+                                            <rect key="frame" x="27" y="106" width="546" height="239"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="200"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -91,17 +91,17 @@
                     <connections>
                         <outlet property="orangeMonkey" destination="v7T-jN-CuK" id="XXv-Al-eEa"/>
                         <outlet property="purpleMonkey" destination="6m0-4T-0x2" id="hzA-L0-Cze"/>
-                        <segue destination="zWy-HH-ZT0" kind="show" identifier="enterExperiment" id="fkQ-fe-8yp"/>
+                        <segue destination="JMY-5m-L0z" kind="show" identifier="toMeetMonkeys" id="xFn-SL-ew9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1308" y="-328"/>
         </scene>
-        <!--View Controller-->
+        <!--Meet Monkeys Controller-->
         <scene sceneID="78d-1K-PTX">
             <objects>
-                <viewController id="JMY-5m-L0z" sceneMemberID="viewController">
+                <viewController id="JMY-5m-L0z" customClass="MeetMonkeysController" customModule="events_child_2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j7G-8O-hLY"/>
                         <viewControllerLayoutGuide type="bottom" id="olI-fi-kc1"/>
@@ -116,18 +116,51 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey orange.png" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-lk-QMs">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey orange.png" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-lk-QMs">
                                             <rect key="frame" x="-22" y="200" width="244" height="200"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-9s-y6a">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-9s-y6a">
                                             <rect key="frame" x="378" y="200" width="244" height="200"/>
                                         </imageView>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3M-fD-Vnx">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="OYM-eL-7GJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe to continue »" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZR-iC-FiU">
+                                                        <rect key="frame" x="124" y="493" width="353" height="52"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="42"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </label>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="8ZR-iC-FiU" secondAttribute="bottom" constant="55" id="8pj-DA-MDR"/>
+                                                    <constraint firstItem="8ZR-iC-FiU" firstAttribute="centerX" secondItem="OYM-eL-7GJ" secondAttribute="centerX" id="es7-lL-hFr"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="NQJ-1k-dWP" appends="YES" id="0ra-s4-ebb"/>
+                                                    <outletCollection property="gestureRecognizers" destination="MZb-ah-npe" appends="YES" id="VCN-mw-60F"/>
+                                                </connections>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
                                     </subviews>
+                                    <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstItem="1nP-lk-QMs" firstAttribute="centerX" secondItem="5Qq-lN-DFj" secondAttribute="centerX" constant="-200" id="Fi9-gF-Pkm"/>
                                         <constraint firstItem="ReA-9s-y6a" firstAttribute="centerY" secondItem="5Qq-lN-DFj" secondAttribute="centerY" id="Ge5-te-d5h"/>
+                                        <constraint firstItem="r3M-fD-Vnx" firstAttribute="top" secondItem="5Qq-lN-DFj" secondAttribute="top" id="MV2-SA-QUC"/>
+                                        <constraint firstItem="r3M-fD-Vnx" firstAttribute="leading" secondItem="5Qq-lN-DFj" secondAttribute="leading" id="fQf-Q0-WKw"/>
                                         <constraint firstItem="1nP-lk-QMs" firstAttribute="centerY" secondItem="5Qq-lN-DFj" secondAttribute="centerY" id="j9R-Y9-73K"/>
+                                        <constraint firstItem="r3M-fD-Vnx" firstAttribute="centerY" secondItem="ReA-9s-y6a" secondAttribute="centerY" id="svd-9B-V4N"/>
                                         <constraint firstItem="ReA-9s-y6a" firstAttribute="centerX" secondItem="5Qq-lN-DFj" secondAttribute="centerX" constant="200" id="xBf-M5-Hau"/>
+                                        <constraint firstAttribute="trailing" secondItem="r3M-fD-Vnx" secondAttribute="trailing" id="zJZ-oG-ODT"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="light"/>
@@ -141,10 +174,27 @@
                             <constraint firstItem="qjk-yc-G2h" firstAttribute="top" secondItem="cGj-gb-7c2" secondAttribute="top" id="uk4-Wj-cB2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="OrangeMonkey" destination="1nP-lk-QMs" id="gGh-dT-bOo"/>
+                        <outlet property="PurpleMonkey" destination="ReA-9s-y6a" id="BTM-RE-sAS"/>
+                        <outlet property="gestureInstruction" destination="8ZR-iC-FiU" id="Tzs-F0-l87"/>
+                        <outlet property="longPressRecognizer" destination="MZb-ah-npe" id="dJ1-gj-DWF"/>
+                        <outlet property="tapGestureRecognizer" destination="NQJ-1k-dWP" id="dFt-oU-UfK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFn-Rb-ntP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NQJ-1k-dWP">
+                    <connections>
+                        <segue destination="zWy-HH-ZT0" kind="show" identifier="tobeginPlayVideo" id="SkM-Zy-UaZ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="MZb-ah-npe">
+                    <connections>
+                        <action selector="beginGame:" destination="JMY-5m-L0z" id="dAI-rO-iON"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1961" y="-335"/>
+            <point key="canvasLocation" x="1985" y="-328"/>
         </scene>
         <!--Play Video Controller-->
         <scene sceneID="sk8-XR-BbR">
@@ -182,9 +232,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="601" height="537"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap anywhere to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31J-HZ-bMm">
-                                                        <rect key="frame" x="67" y="430" width="468" height="52"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap anywhere to continue " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31J-HZ-bMm">
+                                                        <rect key="frame" x="68" y="430" width="465" height="52"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="42"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -235,7 +285,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bananaDisplay" destination="N9V-aJ-gmt" id="Bnk-nN-66l"/>
-                        <segue destination="bIh-Xn-FRQ" kind="show" identifier="endExperiment" id="ww1-ic-aAt"/>
+                        <segue destination="bIh-Xn-FRQ" kind="show" identifier="toEndExperiment" id="ww1-ic-aAt"/>
                         <segue destination="kut-Kf-lCb" kind="show" identifier="toResponse" id="5OX-yf-G0c"/>
                     </connections>
                 </viewController>
@@ -322,8 +372,7 @@
                         <outlet property="advanceWithout" destination="CHN-Oh-K1T" id="EXQ-eK-F7d"/>
                         <outlet property="monkey1" destination="iTS-DN-4qF" id="uMh-g4-tHU"/>
                         <outlet property="monkey2" destination="nxe-hy-ias" id="wB7-4Q-hSp"/>
-                        <segue destination="0bA-ci-b5f" kind="unwind" identifier="continueExperiment" unwindAction="unwindToPlayVideo:" id="8jV-OX-wGj"/>
-                        <segue destination="bIh-Xn-FRQ" kind="show" identifier="experimentFinished" id="9HD-JN-b8a"/>
+                        <segue destination="0bA-ci-b5f" kind="unwind" identifier="tocontinuePlayVideo" unwindAction="unwindToPlayVideo:" id="8jV-OX-wGj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oa0-T5-YW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="4729" y="-328"/>
         </scene>
-        <!--Initial View Controller-->
+        <!--Loading View Controller-->
         <scene sceneID="SGE-6C-iTf">
             <objects>
-                <viewController id="ixq-XP-aB0" customClass="InitialViewController" customModule="events_child_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ixq-XP-aB0" customClass="LoadingViewController" customModule="events_child_2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oQg-qX-bcu"/>
                         <viewControllerLayoutGuide type="bottom" id="6tf-Ht-vvn"/>
@@ -494,8 +543,5 @@
         <image name="monkey orange.png" width="244" height="200"/>
         <image name="monkey purple.png" width="244" height="200"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="9HD-JN-b8a"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
