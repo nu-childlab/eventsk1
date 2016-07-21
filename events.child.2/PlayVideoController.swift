@@ -100,7 +100,11 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         playerController.player = player
         self.presentViewController(playerController, animated: true, completion: nil)
         
-        player.play()
+        //play video automatically after a delay
+        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.player.play()
+        }
        }
     
     //To play practice trials
@@ -116,7 +120,11 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         playerController.player = player
         self.presentViewController(playerController, animated: true, completion: nil)
         
-        player.play()
+        //play video automatically after a delay
+        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.player.play()
+        }
     }
     
     //To populate database with #s,heights,durations in video filename. Could be achieved more concisely but less clearly.

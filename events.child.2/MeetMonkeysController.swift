@@ -42,6 +42,7 @@ class MeetMonkeysController: UIViewController {
     
     //MARK: View Lifecycle
     
+    // holding screen that requires long press to enter experiment so that we can set up the game and subject info before the subject arrives and leave it in this state until they're ready to participate
     override func viewDidLoad() {
         super.viewDidLoad()
         OrangeMonkey.hidden = true
