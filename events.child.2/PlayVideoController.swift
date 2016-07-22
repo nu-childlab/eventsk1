@@ -153,8 +153,8 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             subject.Anumber = fileNameArr[0]
             subject.Aheight = fileNameArr[1]
             subject.Aduration = fileNameArr[2]
-            subject.Bheight = fileNameArr[3]
-            subject.Bnumber = fileNameArr[4]
+            subject.Bnumber = fileNameArr[3]
+            subject.Bheight = fileNameArr[4]
             subject.Bduration = fileNameArr[5]
             }
     }

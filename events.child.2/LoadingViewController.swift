@@ -54,13 +54,12 @@ class LoadingViewController : UIViewController {
         UIView.animateWithDuration(3.0, delay: 0.0, options: .CurveEaseOut, animations: {self.whiteView.alpha = 0}, completion: {_ in
             self.backgroundView = self.whiteView
             self.whiteView.removeFromSuperview()
-            
-            self.rotateLogos()
+
             self.squishLogos()
             self.fadeLogos()
             
             //segue after delay
-            let seconds = 3.7
+            let seconds = 2.7
             let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             
@@ -71,29 +70,23 @@ class LoadingViewController : UIViewController {
             )}
         )}
     
-    //MARK: Logo Animation
-    
-    func rotateLogos(){
-        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: {self.cldlLogo.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))}, completion: nil)
-         UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: {self.nuLogo.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))}, completion: nil)
-
-    }
+    //MARK: Animation
     
     func squishLogos(){
-        UIView.animateWithDuration(0.7, delay: 3.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.7, delay: 2.0, options: .CurveEaseOut, animations: {
             self.cldlLogo.transform = CGAffineTransformMakeScale(1.25, 0.75)
             }, completion: nil)
         
-        UIView.animateWithDuration(0.7, delay: 3.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.7, delay: 2.0, options: .CurveEaseOut, animations: {
             self.nuLogo.transform = CGAffineTransformMakeScale(1.25, 0.75)
             }, completion: nil)
 
     }
     
     func fadeLogos(){
-        UIView.animateWithDuration(2.0, delay: 2.0, options: .CurveEaseInOut, animations: {self.cldlLogo.alpha = 0.0}, completion: {finished in
+        UIView.animateWithDuration(2.0, delay: 1.0, options: .CurveEaseInOut, animations: {self.cldlLogo.alpha = 0.0}, completion: {finished in
             self.cldlLogo.removeFromSuperview()})
-        UIView.animateWithDuration(2.0, delay: 2.0, options: .CurveEaseInOut, animations: {self.nuLogo.alpha = 0.0}, completion: {finished in
+        UIView.animateWithDuration(2.0, delay: 1.0, options: .CurveEaseInOut, animations: {self.nuLogo.alpha = 0.0}, completion: {finished in
             self.nuLogo.removeFromSuperview()})
     }
 
