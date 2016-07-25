@@ -40,7 +40,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     var playerLayer: AVPlayerLayer!
     var playerController: AVPlayerViewController!
     
-    //MARK: Actions
+    //MARK: Stimuli/Videos
     
     //To select ordered stimuli 
     func selectStimuliOrder() {
@@ -127,39 +127,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    //To populate database with #s,heights,durations in video filename. Could be achieved more concisely but less clearly.
-    func newTrial() {
-        let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
-        let fileNameArr = fileName!.componentsSeparatedByString("_")
-        
-        let realm = try! Realm()
-        
-        try! realm.write {
-            //1. set up new trial
-            let newSubject = Subject() //get new instance of Subject model (new db row)
-            
-            newSubject.subjectNumber = subject.subjectNumber //populate fields
-            newSubject.condition = subject.condition
-            
-            subject.order = order
-            newSubject.order = subject.order
-            
-            newSubject.trialNumber = i + 1
-            
-            realm.add(newSubject)
-            self.subject = newSubject //assign to our subject variable to pass to responseVC for updating
-            
-            //2. populate trial with info from filename
-            subject.Anumber = fileNameArr[0]
-            subject.Aheight = fileNameArr[1]
-            subject.Aduration = fileNameArr[2]
-            subject.Bnumber = fileNameArr[3]
-            subject.Bheight = fileNameArr[4]
-            subject.Bduration = fileNameArr[5]
-            }
-    }
-    
-
+    //MARK: Actions
     
     @IBAction func tapGestureReceived(sender: AnyObject) {
        if (n < 2) { //NUMBERofPRACTICETRIALS
@@ -192,6 +160,41 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         bananaDisplay.text = bananas
     }
     
+    //MARK: Realm
+
+    //To add/write database object to the database
+    func newTrial() {
+        
+        let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
+        let fileNameArr = fileName!.componentsSeparatedByString("_")
+        
+        let realm = try! Realm()
+        
+        try! realm.write {
+            //1. set up new trial
+            let newSubject = Subject() //get new instance of Subject model (new db row)
+            
+            newSubject.subjectNumber = subject.subjectNumber //populate fields
+            newSubject.condition = subject.condition
+            
+            subject.order = order
+            newSubject.order = subject.order
+            
+            newSubject.trialNumber = i + 1
+            
+            realm.add(newSubject)
+            self.subject = newSubject //assign to our subject variable to pass to responseVC for updating
+            
+            //2. populate trial with info from filename
+            subject.Anumber = fileNameArr[0]
+            subject.Aheight = fileNameArr[1]
+            subject.Aduration = fileNameArr[2]
+            subject.Bnumber = fileNameArr[3]
+            subject.Bheight = fileNameArr[4]
+            subject.Bduration = fileNameArr[5]
+            }
+    }
+
     //MARK: Navigation
     
     //pass the subject (database) instance to ResponseController

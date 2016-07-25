@@ -92,12 +92,25 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         newSubject.condition = conditionText
         self.subject = newSubject //assign it to our subject var
     }
+    
+    //MARK: Realm Configuration
+    
+     //To set filename of default Realm to studyname_subjectnumber, stored at default location
+    func setDefaultRealmForUser() {
+        var config = Realm.Configuration()
+        config.fileURL = config.fileURL!.URLByDeletingLastPathComponent?.URLByAppendingPathComponent("eventsk1_\(subject.subjectNumber).realm")
+        
+        //set this as the configuration used at the default location
+        Realm.Configuration.defaultConfiguration = config
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL!) //prints database filepath to the console (simulator)
+        
+    }
 
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Realm.Configuration.defaultConfiguration.fileURL!) //prints database filepath to the console
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -110,6 +123,7 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toMeetMonkeys" {
             getSubject() //store subject info in var to pass to VCs
+            setDefaultRealmForUser()
         }
     
         
