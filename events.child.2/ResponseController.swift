@@ -16,6 +16,12 @@ class ResponseController : UIViewController {
     @IBOutlet weak var monkey2: UIButton!
     @IBOutlet weak var advanceWithout: UIButton!
     
+    
+    
+    
+    
+    //MARK: Variables
+    
     //animation completion vars
     var t : Int = 1
     var timer: NSTimer!
@@ -64,13 +70,17 @@ class ResponseController : UIViewController {
     var selectedButton: String!
     var i: Int = 0 //trial# / stimuli index; passed from PVController
     var totalTrials = 8 //CHANGE DEPENDING ON NUMBER OF TRIALS
-    var n: Int = 0 //practice trial index, passed from PVController
+    var p: Int = 0 //practice trial index, passed from PVController
       
     //physics properties
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
     var collision: UICollisionBehavior!
     var elasticity: UIDynamicItemBehavior!
+    
+    
+    
+    
     
     
     //MARK: Actions
@@ -142,15 +152,19 @@ class ResponseController : UIViewController {
         }
         t+=1
     }
+    
+    
+    
+    
   
     //MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //don't update database with practice trials
-        if (n<2) {
-            n+=1
+        if (p<2) {
+            p+=1
             if let destination = segue.destinationViewController as? PlayVideoController{
-                destination.n = self.n
+                destination.p = self.p
             }
         } else {
         //update database for test trials
@@ -166,6 +180,10 @@ class ResponseController : UIViewController {
             }
         }
     }
+    
+    
+    
+    
     
     
     //MARK: Physics 
@@ -190,6 +208,8 @@ class ResponseController : UIViewController {
     }
     
    
+    
+    
 
     
     //MARK: View Lifecycle

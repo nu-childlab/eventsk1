@@ -23,9 +23,10 @@ class MeetMonkeysController: UIViewController {
         OrangeMonkey.hidden = false
         PurpleMonkey.hidden = false
         gestureInstruction.hidden = false
-        gestureInstruction.text = "tap anywhere to continue"
+        gestureInstruction.text = "two-finger tap anywhere to continue"
         longPressRecognizer.enabled = false
         tapGestureRecognizer.enabled = true
+        tapGestureRecognizer.numberOfTapsRequired = 2
         
     }
     

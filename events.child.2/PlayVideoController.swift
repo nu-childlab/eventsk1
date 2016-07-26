@@ -14,7 +14,6 @@ import AVFoundation
 class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var bananaDisplay: UILabel!
-    @IBOutlet weak var topView: UIView!
     
     
     
@@ -31,7 +30,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     var i: Int = 0
     
     //counter for practice trials
-    var n: Int = 0
+    var p: Int = 0
     
     //Var used to specify stimuli order
     var order: Int!
@@ -44,20 +43,12 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     var playerLayer: AVPlayerLayer!
     var playerController: AVPlayerViewController!
     
+    //Stimuli
+    let practiceVideos: [NSObject] = [
+        NSBundle.mainBundle().pathForResource("Practice_A", ofType: "mov")!,
+        NSBundle.mainBundle().pathForResource("practice_B", ofType: "mov")!]
     
-    
-    
-    
-    //MARK: Stimuli/Videos
-    
-    //To select ordered stimuli 
-    func selectStimuliOrder() {
-        
-        let lastCh = subject.subjectNumber[subject.subjectNumber.endIndex.predecessor()]//last character of subject number
-        let odds : [Character] = ["1", "3", "5", "7", "9"]
-        
-        //stimuli arrays, 2 orders
-        let orderA:[NSObject] = [
+    let order1:[NSObject] = [
             NSBundle.mainBundle().pathForResource("4_400_6_3_800_4", ofType: "mov")!, //2
             NSBundle.mainBundle().pathForResource("2_800_6_4_600_4", ofType: "mov")!, //5
             NSBundle.mainBundle().pathForResource("3_800_4_4_400_6", ofType: "mov")!, //1
@@ -66,104 +57,87 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             NSBundle.mainBundle().pathForResource("4_600_4_2_800_6", ofType: "mov")!, //6
             NSBundle.mainBundle().pathForResource("2_800_6_3_400_8", ofType: "mov")!, //3
             NSBundle.mainBundle().pathForResource("2_600_8_4_400_6", ofType: "mov")!] //7
-
-        let orderB:[NSObject] = [
-            orderA[7], //7
-            orderA[2], //1
-            orderA[0], //2
-            orderA[6], //3
-            orderA[5], //6
-            orderA[1], //5
-            orderA[4], //8
-            orderA[3]] //4
     
-        //Alternate order value by odd/even subject number
-        if odds.contains(lastCh){
-            order = 0
-        } else {
+    
+    
+    
+    //MARK: Videos/Stimuli 
+    
+    func selectStimuliOrder() {
+        //alternate order
+           let order2:[NSObject] = [
+            order1[7], //7
+            order1[2], //1
+            order1[0], //2
+            order1[6], //3
+            order1[5], //6
+            order1[1], //5
+            order1[4], //8
+            order1[3]] //4
+
+        let lastCh = subject.subjectNumber[subject.subjectNumber.endIndex.predecessor()]//last character of subject number
+        let evens : [Character] = ["0", "2", "4", "6", "8"]
+    
+        //Order det. by ODD/EVEN subj#
+        if evens.contains(lastCh){
+            order = 2
+            videos = order2
+        } else { //odds and default
             order = 1
-        }
-        //Switch stimuli array and update DB based on order value
-        switch order {
-            case 0:
-            videos = orderA
-            case 1:
-            videos = orderB
-            default:
-            videos = orderA
+            videos = order1
         }
     }
     
-    //To play video via AVPlayerViewController
-    func playVideo(){
+    func playVideo(index: Int, array: [NSObject]){
         //setup
-        path = videos[i] //access next video
+        //path = videos[i] 
+        path = array[index]
         url = NSURL.fileURLWithPath(path as! String)
+        print(url)
         item = AVPlayerItem (URL: url)
-        
-        //initialize AVPlayerVC
-            //presenting as VC and not automatic subview bc we want ability to replay
         player = AVPlayer(playerItem: item)
+        
+        //display the player content
         playerController = AVPlayerViewController()
         playerController.player = player
         playerController.showsPlaybackControls = false
+        
         self.presentViewController(playerController, animated: true, completion: nil)
         
         //setup to get notification when video finished
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoDidFinish", name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayVideoController.videoDidFinish), name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
         
-        //play video automatically after a delay
-        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
-        dispatch_after(time, dispatch_get_main_queue()) {
+        //play after delay
+        let wait = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+        dispatch_after(wait, dispatch_get_main_queue()) {
             self.player.play()
         }
        }
-
-    func videoDidFinish(){
-        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1 * Int64(NSEC_PER_SEC)) //slight delay needed
-        dispatch_after(time, dispatch_get_main_queue()) {
+    
+       func videoDidFinish(){
+        let wait = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1 * Int64(NSEC_PER_SEC)) //slight delay needed
+        dispatch_after(wait, dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
-    //To play practice trials
-    func playPracticeTrials() {
-        let practice : [NSObject] = [
-            NSBundle.mainBundle().pathForResource("Practice_A", ofType: "mov")!,
-            NSBundle.mainBundle().pathForResource("practice_B", ofType: "mov")!]
-        
-        path = practice[n]
-        url = NSURL.fileURLWithPath(path as! String)
-        player = AVPlayer(URL: url)
-        playerController = AVPlayerViewController()
-        playerController.player = player
-        self.presentViewController(playerController, animated: true, completion: nil)
-        
-        //play video automatically after a delay
-        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
-        dispatch_after(time, dispatch_get_main_queue()) {
-            self.player.play()
-        }
-    }
-    
-    
+
     
     
     
     //MARK: Actions
     
     @IBAction func tapGestureReceived(sender: AnyObject) {
-       if (n < 2) { //NUMBERofPRACTICETRIALS
-//            playPracticeTrials()
+       if (p < practiceVideos.count) {
+            playVideo(p, array: practiceVideos)
             self.performSegueWithIdentifier("toResponse", sender: self)
        } else {
-            selectStimuliOrder() //get correct stimuli
-            if (i < videos.count) { //as long as remainint trials to show:
-                playVideo()//show AVPlayerVC and play video
-                newTrial() //create new db row and populate with video filename info and subject info
-                self.performSegueWithIdentifier("toResponse", sender: self) //go to ResponseController (trigger segue when video closed)
+            selectStimuliOrder()
+            if (i < videos.count) { //while trials remaining
+                playVideo(i, array: videos)
+                newTrial() //create new db row, populate with video filename info and subject info
+                self.performSegueWithIdentifier("toResponse", sender: self)
             } else {
-                self.performSegueWithIdentifier("toEndExperiment", sender: self) //if no more trials, show final screen (trigger segue when video closed)
+                self.performSegueWithIdentifier("toEndExperiment", sender: self) //if no more trials, show final screen
             }
         }
     }
@@ -172,7 +146,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         let bananas = String(count: i, repeatedValue: Character("🍌"))
         bananaDisplay.text = bananas
     }
-    
     
     
     
@@ -212,7 +185,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     
     
-    
 
     //MARK: Navigation
     
@@ -222,7 +194,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         if let destination = segue.destinationViewController as? ResponseController {
             destination.subject = self.subject
             destination.i = self.i
-            destination.n = self.n
+            destination.p = self.p
         }
     }
     
@@ -230,7 +202,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     //used to create unwind segue from response controller
     @IBAction func unwindToPlayVideo (segue: UIStoryboardSegue) {
     }
-    
     
     
     
