@@ -14,6 +14,10 @@ import AVFoundation
 class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var bananaDisplay: UILabel!
+    @IBOutlet weak var topView: UIView!
+    
+    
+    
     
     //MARK: Variables
     
@@ -39,6 +43,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     var playerController: AVPlayerViewController!
+    
+    
+    
+    
     
     //MARK: Stimuli/Videos
     
@@ -86,19 +94,23 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    //To play video via AVPlayerViewController (PlayerLayer was too glitchy and slow)
+    //To play video via AVPlayerViewController
     func playVideo(){
         //setup
         path = videos[i] //access next video
         url = NSURL.fileURLWithPath(path as! String)
-        //item = AVPlayerItem (URL: url)
+        item = AVPlayerItem (URL: url)
         
         //initialize AVPlayerVC
             //presenting as VC and not automatic subview bc we want ability to replay
-        player = AVPlayer(URL: url)
+        player = AVPlayer(playerItem: item)
         playerController = AVPlayerViewController()
         playerController.player = player
+        playerController.showsPlaybackControls = false
         self.presentViewController(playerController, animated: true, completion: nil)
+        
+        //setup to get notification when video finished
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoDidFinish", name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
         
         //play video automatically after a delay
         let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
@@ -106,9 +118,16 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             self.player.play()
         }
        }
+
+    func videoDidFinish(){
+        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1 * Int64(NSEC_PER_SEC)) //slight delay needed
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
     
     //To play practice trials
-    func practiceTrials() {
+    func playPracticeTrials() {
         let practice : [NSObject] = [
             NSBundle.mainBundle().pathForResource("Practice_A", ofType: "mov")!,
             NSBundle.mainBundle().pathForResource("practice_B", ofType: "mov")!]
@@ -127,38 +146,36 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    
+    
+    
+    
     //MARK: Actions
     
     @IBAction func tapGestureReceived(sender: AnyObject) {
        if (n < 2) { //NUMBERofPRACTICETRIALS
-            practiceTrials()
-        self.performSegueWithIdentifier("toResponse", sender: self)
+//            playPracticeTrials()
+            self.performSegueWithIdentifier("toResponse", sender: self)
        } else {
-            selectStimuliOrder() //1
-            if (i < videos.count) { //2
-                playVideo()//3
-                newTrial() //4
-                self.performSegueWithIdentifier("toResponse", sender: self) //5
+            selectStimuliOrder() //get correct stimuli
+            if (i < videos.count) { //as long as remainint trials to show:
+                playVideo()//show AVPlayerVC and play video
+                newTrial() //create new db row and populate with video filename info and subject info
+                self.performSegueWithIdentifier("toResponse", sender: self) //go to ResponseController (trigger segue when video closed)
             } else {
-                self.performSegueWithIdentifier("toEndExperiment", sender: self) //6
+                self.performSegueWithIdentifier("toEndExperiment", sender: self) //if no more trials, show final screen (trigger segue when video closed)
             }
         }
     }
-    /*
-     1 - get correct stimuli
-     2 - as long as there are remaining trials to show
-     3 - show AVPlayerVC and play video
-     4 - create new db row and populate with video filename info and subject info
-     5 - go to ResponseController (trigger segue when video is closed)
-     
-     6 - if no more trials, show the final screen (trigger segue when video closed)
-     */
 
-    //keep banana score
     func updateBananaScore() {
         let bananas = String(count: i, repeatedValue: Character("🍌"))
         bananaDisplay.text = bananas
     }
+    
+    
+    
+    
     
     //MARK: Realm
 
@@ -174,16 +191,14 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             //1. set up new trial
             let newSubject = Subject() //get new instance of Subject model (new db row)
             
-            newSubject.subjectNumber = subject.subjectNumber //populate fields
+            newSubject.subjectNumber = subject.subjectNumber //populate fields of realm object
             newSubject.condition = subject.condition
-            
-            subject.order = order
-            newSubject.order = subject.order
+            newSubject.order = order
             
             newSubject.trialNumber = i + 1
             
             realm.add(newSubject)
-            self.subject = newSubject //assign to our subject variable to pass to responseVC for updating
+            self.subject = newSubject //assign to our subject variable to pass to ResponseController for updating
             
             //2. populate trial with info from filename
             subject.Anumber = fileNameArr[0]
@@ -194,6 +209,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             subject.Bduration = fileNameArr[5]
             }
     }
+    
+    
+    
+    
 
     //MARK: Navigation
     
@@ -213,6 +232,9 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     }
     
     
+    
+    
+    
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
@@ -223,8 +245,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(true)
         updateBananaScore()
     }
-
-
 }
 
 

@@ -97,10 +97,8 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     
      //To set filename of default Realm to studyname_subjectnumber, stored at default location
     func setDefaultRealmForUser() {
-        let datestamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .NoStyle) //currDate for filename
-        
         var config = Realm.Configuration()
-        config.fileURL = config.fileURL!.URLByDeletingLastPathComponent?.URLByAppendingPathComponent("eventsk1_\(subject.subjectNumber)_\(datestamp).realm")
+        config.fileURL = config.fileURL!.URLByDeletingLastPathComponent?.URLByAppendingPathComponent("eventsk1_\(subject.subjectNumber).realm")
         
         //set this as the configuration used at the default location
         Realm.Configuration.defaultConfiguration = config
@@ -132,6 +130,7 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         if let destination = segue.destinationViewController as? MeetMonkeysController {
             destination.subject = self.subject //pass subject instance to PVC
         }
+        
     }
     
     //MARK: Animation 

@@ -285,6 +285,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bananaDisplay" destination="N9V-aJ-gmt" id="Bnk-nN-66l"/>
+                        <outlet property="topView" destination="dBo-5N-iV5" id="LMf-3S-nZo"/>
                         <segue destination="bIh-Xn-FRQ" kind="show" identifier="toEndExperiment" id="ww1-ic-aAt"/>
                         <segue destination="kut-Kf-lCb" kind="show" identifier="toResponse" id="5OX-yf-G0c"/>
                     </connections>
