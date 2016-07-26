@@ -10,13 +10,17 @@ import UIKit
 
 class MeetMonkeysController: UIViewController {
     
-    var subject: Subject! //receives subject instance from WelcomeController
+    var trial: Trial! //receives subject instance from WelcomeController
     @IBOutlet weak var OrangeMonkey: UIImageView!
     @IBOutlet weak var PurpleMonkey: UIImageView!
     @IBOutlet weak var gestureInstruction: UILabel!
-      @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var longPressRecognizer: UILongPressGestureRecognizer!
    
+    
+    
+    
+    
     //MARK: Actions
     
     @IBAction func beginGame(sender: UILongPressGestureRecognizer) {
@@ -30,6 +34,10 @@ class MeetMonkeysController: UIViewController {
         
     }
     
+    
+    
+    
+    
     //MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -37,9 +45,13 @@ class MeetMonkeysController: UIViewController {
         let navVC = segue.destinationViewController as! UINavigationController
         
         if let destination = navVC.viewControllers.first as? PlayVideoController {
-            destination.subject = self.subject //pass subject instance to PlayVideoController
+            destination.trial = self.trial //pass subject instance to PlayVideoController
         }
     }
+    
+    
+    
+    
     
     //MARK: View Lifecycle
     

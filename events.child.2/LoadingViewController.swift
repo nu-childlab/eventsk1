@@ -19,6 +19,9 @@ class LoadingViewController : UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     
     
+    
+    
+    
     //MARK: View Setup
     
     func coverBackgroundWhite() {
@@ -70,6 +73,10 @@ class LoadingViewController : UIViewController {
             )}
         )}
     
+    
+    
+    
+    
     //MARK: Animation
     
     func squishLogos(){
@@ -90,6 +97,10 @@ class LoadingViewController : UIViewController {
             self.nuLogo.removeFromSuperview()})
     }
 
+    
+    
+    
+    
     //MARK: View Lifecycle
     
     override func viewDidLoad() {

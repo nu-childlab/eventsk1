@@ -66,7 +66,7 @@ class ResponseController : UIViewController {
     var bananas: UIView! //left or right banana physics
     
     //db vars
-    var subject: Subject! //passed from PVController
+    var trial: Trial! //passed from PVController
     var selectedButton: String!
     var i: Int = 0 //trial# / stimuli index; passed from PVController
     var totalTrials = 8 //CHANGE DEPENDING ON NUMBER OF TRIALS
@@ -90,7 +90,7 @@ class ResponseController : UIViewController {
     {
         let realm = try! Realm()
         try! realm.write {
-            self.subject.response = self.selectedButton!
+            self.trial.response = self.selectedButton!
         }
     }
     
@@ -175,7 +175,7 @@ class ResponseController : UIViewController {
         
             //pass variables to destinationVC
             if let destination = segue.destinationViewController as? PlayVideoController {
-                destination.subject = self.subject
+                destination.trial = self.trial
                 destination.i = self.i
             }
         }

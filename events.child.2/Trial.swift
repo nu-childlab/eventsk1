@@ -1,5 +1,5 @@
 //
-//  Subject.swift
+//  Trial.swift
 //  events.child.2
 //
 //  Created by Casey Colby on 4/22/16.
@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-class Subject: Object {
+class Trial: Object {
 
     dynamic var subjectNumber = ""
     dynamic var condition = ""
-    dynamic var order = 0 //odd s# corresponds to order 0 
+    dynamic var order = 1 //odd/default (1), even(2)
     dynamic var created = NSDate()
     dynamic var trialNumber = 0
     dynamic var Anumber = ""

@@ -11,26 +11,28 @@ import RealmSwift
 
 class WelcomeController: UIViewController, UIAlertViewDelegate {
 
+    
     //MARK: Variables
     
     //button outlets
     @IBOutlet weak var enterSubjectInfo: UIBarButtonItem!
     
     //subject info vars
-    var subject: Subject!
-    var selectedButton: String!
-    var subjectNumberText: String!
-    var conditionText: String!
+    var trial: Trial = Trial() //create new instance of Trial object
     
     //alert vars
     var saveAction: UIAlertAction!
     var cancelAction: UIAlertAction!
     
+    
+    
+    
+    
     //MARK: Actions
     
     //Check that all fields are populated
     func validateFields() -> Bool {
-        if subjectNumberText.isEmpty || conditionText.isEmpty {
+        if trial.subjectNumber.isEmpty || trial.condition.isEmpty {
             let alertController = UIAlertController(title: "Validation Error", message: "All fields must be filled", preferredStyle: .Alert)
             let alertAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Destructive) { alert in
                 alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -68,8 +70,8 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         // parameters -> return type (void)
         //in indicates the start of the closure body
         saveAction = UIAlertAction(title: "Save", style: .Default, handler: {action in
-            self.subjectNumberText = "\((alertController.textFields![0] as UITextField).text!)" //unwrap array UITextFields (array of type AnyObject), cast to UITextField, and get the text variable from the entry
-            self.conditionText = "\((alertController.textFields![1] as UITextField).text!)"
+            self.trial.subjectNumber = "\((alertController.textFields![0] as UITextField).text!)" //unwrap array UITextFields (array of type AnyObject), cast to UITextField, and get the text variable from the entry
+            self.trial.condition = "\((alertController.textFields![1] as UITextField).text!)"
             
             if self.validateFields() { //require that all fields are filled before segue is called
                 self.performSegueWithIdentifier("toMeetMonkeys", sender: self) //manually segue when save button pressed
@@ -85,20 +87,14 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     }
     
     
-    //subject instance for future database use
-    func getSubject() {
-        let newSubject = Subject() //create new instance of our model Subject
-        newSubject.subjectNumber = subjectNumberText //populate its properties
-        newSubject.condition = conditionText
-        self.subject = newSubject //assign it to our subject var
-    }
+    
     
     //MARK: Realm Configuration
     
      //To set filename of default Realm to studyname_subjectnumber, stored at default location
     func setDefaultRealmForUser() {
         var config = Realm.Configuration()
-        config.fileURL = config.fileURL!.URLByDeletingLastPathComponent?.URLByAppendingPathComponent("eventsk1_\(subject.subjectNumber).realm")
+        config.fileURL = config.fileURL!.URLByDeletingLastPathComponent?.URLByAppendingPathComponent("eventsk1_\(trial.subjectNumber).realm")
         
         //set this as the configuration used at the default location
         Realm.Configuration.defaultConfiguration = config
@@ -107,31 +103,38 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         
     }
 
-    //MARK: View Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
+    
+    
+    //MARK: View Lifecycle
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         bounceMonkeys()
     }
     
+    
+    
+    
+    
     //MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toMeetMonkeys" {
-            getSubject() //store subject info in var to pass to VCs
             setDefaultRealmForUser()
         }
     
         
         if let destination = segue.destinationViewController as? MeetMonkeysController {
-            destination.subject = self.subject //pass subject instance to PVC
+            destination.trial = self.trial //pass subject instance to PVC
         }
         
     }
+    
+    
+    
+    
     
     //MARK: Animation 
     

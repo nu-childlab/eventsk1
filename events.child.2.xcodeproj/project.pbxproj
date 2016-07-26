@@ -29,7 +29,7 @@
 		142664731CC81D5600EB8BE6 /* PlayVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142664721CC81D5600EB8BE6 /* PlayVideoController.swift */; };
 		1430722C1CCA906000F503A1 /* ResponseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430722B1CCA906000F503A1 /* ResponseController.swift */; };
 		145338761D3FFDB30056C9F5 /* MeetMonkeysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145338751D3FFDB30056C9F5 /* MeetMonkeysController.swift */; };
-		1477DF5A1CCACEE10013B4B6 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1477DF591CCACEE10013B4B6 /* Subject.swift */; };
+		1477DF5A1CCACEE10013B4B6 /* Trial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1477DF591CCACEE10013B4B6 /* Trial.swift */; };
 		148D11701D17A4410095BD6A /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D116F1D17A4410095BD6A /* LoadingViewController.swift */; };
 		14CE50301D1B1DD70078A95D /* NULing.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CE502F1D1B1DD70078A95D /* NULing.png */; };
 		14E444A41CFCC0F00006F22F /* ResponseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E444A31CFCC0F00006F22F /* ResponseBackground.swift */; };
@@ -80,7 +80,7 @@
 		142664721CC81D5600EB8BE6 /* PlayVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayVideoController.swift; path = events.child.2/PlayVideoController.swift; sourceTree = SOURCE_ROOT; };
 		1430722B1CCA906000F503A1 /* ResponseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseController.swift; path = events.child.2/ResponseController.swift; sourceTree = SOURCE_ROOT; };
 		145338751D3FFDB30056C9F5 /* MeetMonkeysController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetMonkeysController.swift; path = events.child.2/MeetMonkeysController.swift; sourceTree = SOURCE_ROOT; };
-		1477DF591CCACEE10013B4B6 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Subject.swift; path = events.child.2/Subject.swift; sourceTree = SOURCE_ROOT; };
+		1477DF591CCACEE10013B4B6 /* Trial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trial.swift; path = events.child.2/Trial.swift; sourceTree = SOURCE_ROOT; };
 		148D116F1D17A4410095BD6A /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingViewController.swift; path = events.child.2/LoadingViewController.swift; sourceTree = SOURCE_ROOT; };
 		14CE502F1D1B1DD70078A95D /* NULing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NULing.png; path = images/NULing.png; sourceTree = SOURCE_ROOT; };
 		14E444A31CFCC0F00006F22F /* ResponseBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseBackground.swift; path = events.child.2/ResponseBackground.swift; sourceTree = SOURCE_ROOT; };
@@ -174,7 +174,7 @@
 		1426647E1CC81E0600EB8BE6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1477DF591CCACEE10013B4B6 /* Subject.swift */,
+				1477DF591CCACEE10013B4B6 /* Trial.swift */,
 			);
 			name = Models;
 			path = events.child.2;
@@ -275,7 +275,7 @@
 				14E444A41CFCC0F00006F22F /* ResponseBackground.swift in Sources */,
 				1430722C1CCA906000F503A1 /* ResponseController.swift in Sources */,
 				1426645F1CC8183D00EB8BE6 /* WelcomeController.swift in Sources */,
-				1477DF5A1CCACEE10013B4B6 /* Subject.swift in Sources */,
+				1477DF5A1CCACEE10013B4B6 /* Trial.swift in Sources */,
 				1426645D1CC8183D00EB8BE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

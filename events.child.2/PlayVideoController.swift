@@ -18,21 +18,19 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     
     
+    
     //MARK: Variables
+
+    var trial: Trial!
     
-    //Subject instance passed from WelcomeController
-    var subject: Subject!
-    
-    //Initialize array for stimuli
     var videos: [NSObject]!
 
-    //Counter for array index (TRIALNUMBER)
+    //trialnumber
     var i: Int = 0
     
-    //counter for practice trials
+    //practicetrialnumber
     var p: Int = 0
     
-    //Var used to specify stimuli order
     var order: Int!
     
     //Variables for video functions
@@ -61,6 +59,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     
     
+    
     //MARK: Videos/Stimuli 
     
     func selectStimuliOrder() {
@@ -75,7 +74,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             order1[4], //8
             order1[3]] //4
 
-        let lastCh = subject.subjectNumber[subject.subjectNumber.endIndex.predecessor()]//last character of subject number
+        let lastCh = trial.subjectNumber[trial.subjectNumber.endIndex.predecessor()]//last character of subject number
         let evens : [Character] = ["0", "2", "4", "6", "8"]
     
         //Order det. by ODD/EVEN subj#
@@ -90,7 +89,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     func playVideo(index: Int, array: [NSObject]){
         //setup
-        //path = videos[i] 
         path = array[index]
         url = NSURL.fileURLWithPath(path as! String)
         print(url)
@@ -104,7 +102,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         
         self.presentViewController(playerController, animated: true, completion: nil)
         
-        //setup to get notification when video finished
+        //setup notification when video finished
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayVideoController.videoDidFinish), name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
         
         //play after delay
@@ -122,9 +120,45 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     }
 
     
+
     
     
-    //MARK: Actions
+    //MARK: Realm
+
+    //To add/write database object to the database
+    func addTrialToDatabase() {
+        let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
+        let fileNameArr = fileName!.componentsSeparatedByString("_")
+        
+        let realm = try! Realm()
+        
+        try! realm.write {
+            //1. set up new trial
+            let newTrial = Trial() //get new instance of Subject model (new db row)
+            
+            newTrial.subjectNumber = trial.subjectNumber //populate fields of realm object
+            newTrial.condition = trial.condition
+            newTrial.order = order
+            newTrial.trialNumber = i + 1 //convert from index
+            
+            realm.add(newTrial)
+            self.trial = newTrial //assign to our subject variable to pass to ResponseController for updating
+            
+            //2. populate trial with info from filename
+            trial.Anumber = fileNameArr[0]
+            trial.Aheight = fileNameArr[1]
+            trial.Aduration = fileNameArr[2]
+            trial.Bnumber = fileNameArr[3]
+            trial.Bheight = fileNameArr[4]
+            trial.Bduration = fileNameArr[5]
+        }
+    }
+    
+    
+    
+    
+    
+      //MARK: Actions
     
     @IBAction func tapGestureReceived(sender: AnyObject) {
        if (p < practiceVideos.count) {
@@ -134,7 +168,8 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             selectStimuliOrder()
             if (i < videos.count) { //while trials remaining
                 playVideo(i, array: videos)
-                newTrial() //create new db row, populate with video filename info and subject info
+                //newTrial() //create new db row, populate with video filename info and subject info
+                addTrialToDatabase()
                 self.performSegueWithIdentifier("toResponse", sender: self)
             } else {
                 self.performSegueWithIdentifier("toEndExperiment", sender: self) //if no more trials, show final screen
@@ -146,42 +181,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         let bananas = String(count: i, repeatedValue: Character("🍌"))
         bananaDisplay.text = bananas
     }
-    
-    
-    
-    
-    //MARK: Realm
 
-    //To add/write database object to the database
-    func newTrial() {
-        
-        let fileName = url.URLByDeletingPathExtension?.lastPathComponent!
-        let fileNameArr = fileName!.componentsSeparatedByString("_")
-        
-        let realm = try! Realm()
-        
-        try! realm.write {
-            //1. set up new trial
-            let newSubject = Subject() //get new instance of Subject model (new db row)
-            
-            newSubject.subjectNumber = subject.subjectNumber //populate fields of realm object
-            newSubject.condition = subject.condition
-            newSubject.order = order
-            
-            newSubject.trialNumber = i + 1
-            
-            realm.add(newSubject)
-            self.subject = newSubject //assign to our subject variable to pass to ResponseController for updating
-            
-            //2. populate trial with info from filename
-            subject.Anumber = fileNameArr[0]
-            subject.Aheight = fileNameArr[1]
-            subject.Aduration = fileNameArr[2]
-            subject.Bnumber = fileNameArr[3]
-            subject.Bheight = fileNameArr[4]
-            subject.Bduration = fileNameArr[5]
-            }
-    }
     
     
     
@@ -192,7 +192,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
         if let destination = segue.destinationViewController as? ResponseController {
-            destination.subject = self.subject
+            destination.trial = self.trial
             destination.i = self.i
             destination.p = self.p
         }
@@ -202,6 +202,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     //used to create unwind segue from response controller
     @IBAction func unwindToPlayVideo (segue: UIStoryboardSegue) {
     }
+    
     
     
     
