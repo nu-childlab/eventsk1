@@ -11,11 +11,9 @@ import RealmSwift
 
 class WelcomeController: UIViewController, UIAlertViewDelegate {
 
+     @IBOutlet weak var enterSubjectInfo: UIBarButtonItem!
     
     //MARK: Variables
-    
-    //button outlets
-    @IBOutlet weak var enterSubjectInfo: UIBarButtonItem!
     
     //subject info vars
     var trial: Trial = Trial() //create new instance of Trial object
@@ -23,6 +21,16 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     //alert vars
     var saveAction: UIAlertAction!
     var cancelAction: UIAlertAction!
+    
+    //animation vars
+    @IBOutlet weak var orangeMonkey: UIImageView!
+    @IBOutlet weak var purpleMonkey: UIImageView!
+    var monkeys : [UIDynamicItem]!
+
+    var animator: UIDynamicAnimator!
+    var gravity: UIGravityBehavior!
+    var collision: UICollisionBehavior!
+    var elasticity: UIDynamicItemBehavior!
     
     
     
@@ -89,6 +97,29 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     
     
     
+    
+    //MARK: Animation 
+    
+    func bounceMonkeys() {
+        monkeys = [orangeMonkey, purpleMonkey]
+        
+        animator = UIDynamicAnimator(referenceView: view)
+        
+        gravity = UIGravityBehavior(items: monkeys)
+        collision = UICollisionBehavior(items: monkeys)
+        collision.translatesReferenceBoundsIntoBoundary = true
+        elasticity = UIDynamicItemBehavior(items: monkeys)
+        elasticity.elasticity = 1.06
+        
+        // Add to animator
+        animator.addBehavior(gravity)
+        animator.addBehavior(collision)
+        animator.addBehavior(elasticity)
+        
+    }
+    
+    
+    
     //MARK: Realm Configuration
     
      //To set filename of default Realm to studyname_subjectnumber, stored at default location
@@ -131,39 +162,7 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         }
         
     }
-    
-    
-    
-    
-    
-    //MARK: Animation 
-    
-    @IBOutlet weak var orangeMonkey: UIImageView!
-    @IBOutlet weak var purpleMonkey: UIImageView!
-    var monkeys : [UIDynamicItem]!
 
-    var animator: UIDynamicAnimator!
-    var gravity: UIGravityBehavior!
-    var collision: UICollisionBehavior!
-    var elasticity: UIDynamicItemBehavior!
-    
-    func bounceMonkeys() {
-        monkeys = [orangeMonkey, purpleMonkey]
-        
-        animator = UIDynamicAnimator(referenceView: view)
-        
-        gravity = UIGravityBehavior(items: monkeys)
-        collision = UICollisionBehavior(items: monkeys)
-        collision.translatesReferenceBoundsIntoBoundary = true
-        elasticity = UIDynamicItemBehavior(items: monkeys)
-        elasticity.elasticity = 1.06
-        
-        // Add to animator
-        animator.addBehavior(gravity)
-        animator.addBehavior(collision)
-        animator.addBehavior(elasticity)
-        
-    }
     
 }
 

@@ -11,39 +11,29 @@ import UIKit
 
 class EndExperimentController : UIViewController {
     
-    // MARK: Init Dynamics properties
+     @IBOutlet weak var orangeMonkey: UIImageView!
+    @IBOutlet weak var purpleMonkey: UIImageView!
+
+    //MARK: Variables
     
+    //init dynamics properties
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
     var collision: UICollisionBehavior!
     var elasticity: UIDynamicItemBehavior!
 
-    
-
-    
-
-    //MARK: View Lifecycle
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        bounceMonkeys()
-    }
-    
-    
-    
-    
-    
-    //MARK: Background Animations
-    
-    @IBOutlet weak var orangeMonkey: UIImageView!
-    @IBOutlet weak var purpleMonkey: UIImageView!
-    
     var monkeys : [UIDynamicItem]!
     
     var monkeyAnimator: UIDynamicAnimator!
     var monkeyGravity: UIGravityBehavior!
     var monkeyCollision: UICollisionBehavior!
     var monkeyElasticity: UIDynamicItemBehavior!
+    
+    
+    
+    
+    
+    //MARK: Background Animations
     
     func bounceMonkeys() {
         monkeys = [orangeMonkey, purpleMonkey]
@@ -61,6 +51,17 @@ class EndExperimentController : UIViewController {
         monkeyAnimator.addBehavior(monkeyCollision)
         monkeyAnimator.addBehavior(monkeyElasticity)
         
+    }
+    
+    
+    
+    
+    
+    //MARK: View Lifecycle
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        bounceMonkeys()
     }
     
 }

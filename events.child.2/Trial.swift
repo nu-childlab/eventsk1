@@ -16,6 +16,7 @@ class Trial: Object {
     dynamic var order = 1 //odd/default (1), even(2)
     dynamic var created = NSDate()
     dynamic var trialNumber = 0
+    
     dynamic var Anumber = ""
     dynamic var Aheight = ""
     dynamic var Aduration = ""
@@ -23,4 +24,12 @@ class Trial: Object {
     dynamic var Bheight = ""
     dynamic var Bduration = ""
     dynamic var response = ""
+    
+    dynamic var numberWin = ""
+    dynamic var heightWin = ""
+    dynamic var durationWin = ""
+    
+    dynamic var numberResp = 0
+    dynamic var heightResp = 0
+    dynamic var durationResp = 0
 }

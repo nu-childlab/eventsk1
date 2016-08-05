@@ -10,16 +10,19 @@ import UIKit
 
 class MeetMonkeysController: UIViewController {
     
-    var trial: Trial! //receives subject instance from WelcomeController
     @IBOutlet weak var OrangeMonkey: UIImageView!
     @IBOutlet weak var PurpleMonkey: UIImageView!
     @IBOutlet weak var gestureInstruction: UILabel!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var longPressRecognizer: UILongPressGestureRecognizer!
+    
+    //MARK: Variables
+    
+    var trial: Trial! //receives subject instance from WelcomeController
+
    
     
-    
-    
+
     
     //MARK: Actions
     
@@ -32,6 +35,24 @@ class MeetMonkeysController: UIViewController {
         tapGestureRecognizer.enabled = true
         tapGestureRecognizer.numberOfTapsRequired = 2
         
+    }
+ 
+    
+    
+    
+    
+    
+    //MARK: View Lifecycle
+    
+    // holding screen that requires long press to enter experiment so that we can set up the game and subject info before the subject arrives and leave it in this state until they're ready to participate
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        OrangeMonkey.hidden = true
+        PurpleMonkey.hidden = true
+        gestureInstruction.text = "press and hold to enter"
+        gestureInstruction.hidden = false
+        tapGestureRecognizer.enabled = false
+        longPressRecognizer.enabled = true
     }
     
     
@@ -49,23 +70,6 @@ class MeetMonkeysController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    //MARK: View Lifecycle
-    
-    // holding screen that requires long press to enter experiment so that we can set up the game and subject info before the subject arrives and leave it in this state until they're ready to participate
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        OrangeMonkey.hidden = true
-        PurpleMonkey.hidden = true
-        gestureInstruction.text = "press and hold to enter"
-        gestureInstruction.hidden = false
-        tapGestureRecognizer.enabled = false
-        longPressRecognizer.enabled = true
-
-    }
     
 }
 

@@ -14,11 +14,7 @@ import AVFoundation
 class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var bananaDisplay: UILabel!
-    
-    
-    
-    
-    
+
     //MARK: Variables
 
     var trial: Trial!
@@ -30,7 +26,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     
     //practicetrialnumber
     var p: Int = 0
-    
     var order: Int!
     
     //Variables for video functions
@@ -42,19 +37,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     var playerController: AVPlayerViewController!
     
     //Stimuli
-    let practiceVideos: [NSObject] = [
-        NSBundle.mainBundle().pathForResource("Practice_A", ofType: "mov")!,
-        NSBundle.mainBundle().pathForResource("practice_B", ofType: "mov")!]
-    
-    let order1:[NSObject] = [
-            NSBundle.mainBundle().pathForResource("4_400_6_3_800_4", ofType: "mov")!, //2
-            NSBundle.mainBundle().pathForResource("2_800_6_4_600_4", ofType: "mov")!, //5
-            NSBundle.mainBundle().pathForResource("3_800_4_4_400_6", ofType: "mov")!, //1
-            NSBundle.mainBundle().pathForResource("3_400_8_2_800_6", ofType: "mov")!, //4
-            NSBundle.mainBundle().pathForResource("4_400_6_2_600_8", ofType: "mov")!, //8
-            NSBundle.mainBundle().pathForResource("4_600_4_2_800_6", ofType: "mov")!, //6
-            NSBundle.mainBundle().pathForResource("2_800_6_3_400_8", ofType: "mov")!, //3
-            NSBundle.mainBundle().pathForResource("2_600_8_4_400_6", ofType: "mov")!] //7
+    var stim = Stimuli()
     
     
     
@@ -63,16 +46,6 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     //MARK: Videos/Stimuli 
     
     func selectStimuliOrder() {
-        //alternate order
-           let order2:[NSObject] = [
-            order1[7], //7
-            order1[2], //1
-            order1[0], //2
-            order1[6], //3
-            order1[5], //6
-            order1[1], //5
-            order1[4], //8
-            order1[3]] //4
 
         let lastCh = trial.subjectNumber[trial.subjectNumber.endIndex.predecessor()]//last character of subject number
         let evens : [Character] = ["0", "2", "4", "6", "8"]
@@ -80,10 +53,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         //Order det. by ODD/EVEN subj#
         if evens.contains(lastCh){
             order = 2
-            videos = order2
+            videos = stim.order2
         } else { //odds and default
             order = 1
-            videos = order1
+            videos = stim.order1
         }
     }
     
@@ -91,7 +64,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         //setup
         path = array[index]
         url = NSURL.fileURLWithPath(path as! String)
-        print(url)
+        print("playing \(url.lastPathComponent!)")
         item = AVPlayerItem (URL: url)
         player = AVPlayer(playerItem: item)
         
@@ -118,9 +91,38 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
+    
+    
+    
+    
+    
+    //MARK: Data pre-processing
+    
+    func preProcessData(){
+        if(trial.Anumber > trial.Bnumber) {
+            trial.numberWin = "A"
+        } else {
+            trial.numberWin = "B"
+        }
+        
+        if (trial.Aheight > trial.Bheight) {
+            trial.heightWin = "A"
+        } else {
+            trial.heightWin = "B"
+        }
+        
+        if trial.Aduration > trial.Bduration {
+            trial.durationWin = "A"
+        } else {
+            trial.durationWin = "B"
+        }
+        
+        
+    }
 
     
-
+    
+    
     
     
     //MARK: Realm
@@ -151,8 +153,12 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
             trial.Bnumber = fileNameArr[3]
             trial.Bheight = fileNameArr[4]
             trial.Bduration = fileNameArr[5]
+            
+            preProcessData()
         }
     }
+    
+
     
     
     
@@ -161,8 +167,8 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
       //MARK: Actions
     
     @IBAction func tapGestureReceived(sender: AnyObject) {
-       if (p < practiceVideos.count) {
-            playVideo(p, array: practiceVideos)
+       if (p < stim.practice.count) {
+            playVideo(p, array: stim.practice)
             self.performSegueWithIdentifier("toResponse", sender: self)
        } else {
             selectStimuliOrder()
@@ -181,7 +187,18 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         let bananas = String(count: i, repeatedValue: Character("🍌"))
         bananaDisplay.text = bananas
     }
-
+    
+    
+    
+    
+    
+    //MARK: View Lifecycle
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        updateBananaScore()
+    }
+    
     
     
     
@@ -199,24 +216,10 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     }
     
 
-    //used to create unwind segue from response controller
+    //this VC is source for unwind segue from ResponseController
     @IBAction func unwindToPlayVideo (segue: UIStoryboardSegue) {
     }
-    
-    
-    
-    
-    
-    //MARK: View Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        updateBananaScore()
-    }
+
 }
 
 

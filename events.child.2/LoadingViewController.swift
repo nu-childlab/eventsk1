@@ -10,13 +10,18 @@ import UIKit
 
 class LoadingViewController : UIViewController {
     
+    
+    @IBOutlet weak var backgroundView: UIView!
+    
+    //MARK: Variables
+    
     var whiteView: UIView!
     var blur: UIBlurEffect!
     var blurView: UIVisualEffectView!
     var cldlLogo: UIImageView!
     var nuLogo: UIImageView!
     
-    @IBOutlet weak var backgroundView: UIView!
+  
     
     
     
