@@ -34,11 +34,11 @@
 		14CE50301D1B1DD70078A95D /* NULing.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CE502F1D1B1DD70078A95D /* NULing.png */; };
 		14E444A41CFCC0F00006F22F /* ResponseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E444A31CFCC0F00006F22F /* ResponseBackground.swift */; };
 		14F53D951D08B27800637DD5 /* ChiLDyB02.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F53D931D08B27800637DD5 /* ChiLDyB02.png */; };
+		990C58BC1D5D1F1B00E53300 /* Stimuli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ACBBCE1D4AA43C00B1793D /* Stimuli.swift */; };
 		99182EDE1D47D15D0091FCBF /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99182EDC1D47D15D0091FCBF /* RealmSwift.framework */; };
 		99182EDF1D47D15D0091FCBF /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99182EDC1D47D15D0091FCBF /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99182EE01D47D15D0091FCBF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99182EDD1D47D15D0091FCBF /* Realm.framework */; };
 		99182EE11D47D15D0091FCBF /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99182EDD1D47D15D0091FCBF /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		99ACBBCF1D4AA43C00B1793D /* Stimuli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ACBBCE1D4AA43C00B1793D /* Stimuli.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,7 +88,7 @@
 		14F53D931D08B27800637DD5 /* ChiLDyB02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChiLDyB02.png; path = images/ChiLDyB02.png; sourceTree = SOURCE_ROOT; };
 		99182EDC1D47D15D0091FCBF /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		99182EDD1D47D15D0091FCBF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		99ACBBCE1D4AA43C00B1793D /* Stimuli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stimuli.swift; path = eventsk1/Stimuli.swift; sourceTree = "<group>"; };
+		99ACBBCE1D4AA43C00B1793D /* Stimuli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stimuli.swift; path = eventsk1/Stimuli.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,7 +277,7 @@
 				145338761D3FFDB30056C9F5 /* MeetMonkeysController.swift in Sources */,
 				148D11701D17A4410095BD6A /* LoadingViewController.swift in Sources */,
 				14E444A41CFCC0F00006F22F /* ResponseBackground.swift in Sources */,
-				99ACBBCF1D4AA43C00B1793D /* Stimuli.swift in Sources */,
+				990C58BC1D5D1F1B00E53300 /* Stimuli.swift in Sources */,
 				1430722C1CCA906000F503A1 /* ResponseController.swift in Sources */,
 				1426645F1CC8183D00EB8BE6 /* WelcomeController.swift in Sources */,
 				1477DF5A1CCACEE10013B4B6 /* Trial.swift in Sources */,
@@ -294,7 +294,8 @@
 				142664611CC8183D00EB8BE6 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
+			path = eventsk1;
+			sourceTree = SOURCE_ROOT;
 		};
 		142664651CC8183D00EB8BE6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -302,7 +303,8 @@
 				142664661CC8183D00EB8BE6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
+			path = eventsk1;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
@@ -402,7 +404,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = events.child.2/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/eventsk1/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = c.colby.eventsk1;
@@ -421,7 +423,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = events.child.2/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/eventsk1/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = c.colby.eventsk1;
