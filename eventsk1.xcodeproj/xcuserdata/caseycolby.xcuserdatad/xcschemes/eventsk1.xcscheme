@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "142664581CC8183D00EB8BE6"
-               BuildableName = "events.child.2.app"
-               BlueprintName = "events.child.2"
-               ReferencedContainer = "container:events.child.2.xcodeproj">
+               BuildableName = "eventsk1.app"
+               BlueprintName = "eventsk1"
+               ReferencedContainer = "container:eventsk1.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "142664581CC8183D00EB8BE6"
-            BuildableName = "events.child.2.app"
-            BlueprintName = "events.child.2"
-            ReferencedContainer = "container:events.child.2.xcodeproj">
+            BuildableName = "eventsk1.app"
+            BlueprintName = "eventsk1"
+            ReferencedContainer = "container:eventsk1.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "142664581CC8183D00EB8BE6"
-            BuildableName = "events.child.2.app"
-            BlueprintName = "events.child.2"
-            ReferencedContainer = "container:events.child.2.xcodeproj">
+            BuildableName = "eventsk1.app"
+            BlueprintName = "eventsk1"
+            ReferencedContainer = "container:eventsk1.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "142664581CC8183D00EB8BE6"
-            BuildableName = "events.child.2.app"
-            BlueprintName = "events.child.2"
-            ReferencedContainer = "container:events.child.2.xcodeproj">
+            BuildableName = "eventsk1.app"
+            BlueprintName = "eventsk1"
+            ReferencedContainer = "container:eventsk1.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -86,7 +86,6 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "eventsk1v1"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
