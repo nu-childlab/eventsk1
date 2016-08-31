@@ -188,6 +188,12 @@ class ResponseController : UIViewController {
         revealObjectAnimated()
     }
     
+    
+    
+    
+    
+    //MARK: Animation
+    
     func wobbleButton(sender:UIButton) {
         //shrink
         sender.transform = CGAffineTransformMakeScale(0.1, 0.1)
@@ -210,8 +216,6 @@ class ResponseController : UIViewController {
             addBananaPhysics()
         }
     }
-
-    
     
     //to check if UIObject still moving (if not, trigger segue)
     func capturePosition() {
