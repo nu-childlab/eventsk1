@@ -186,6 +186,7 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
     func updateBananaScore() {
         let bananas = String(count: i, repeatedValue: Character("🍌"))
         bananaDisplay.text = bananas
+        bananaDisplay.textAlignment = NSTextAlignment.Left
     }
     
     

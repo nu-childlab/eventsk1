@@ -14,7 +14,6 @@ class MeetMonkeysController: UIViewController {
     @IBOutlet weak var PurpleMonkey: UIImageView!
     @IBOutlet weak var gestureInstruction: UILabel!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
-    @IBOutlet var longPressRecognizer: UILongPressGestureRecognizer!
     
     //MARK: Variables
     
@@ -24,22 +23,6 @@ class MeetMonkeysController: UIViewController {
     
 
     
-    //MARK: Actions
-    
-    @IBAction func beginGame(sender: UILongPressGestureRecognizer) {
-        OrangeMonkey.hidden = false
-        PurpleMonkey.hidden = false
-        gestureInstruction.hidden = false
-        gestureInstruction.text = "two-finger tap anywhere to continue"
-        longPressRecognizer.enabled = false
-        tapGestureRecognizer.enabled = true
-        tapGestureRecognizer.numberOfTapsRequired = 2
-        
-    }
- 
-    
-    
-    
     
     
     //MARK: View Lifecycle
@@ -47,12 +30,11 @@ class MeetMonkeysController: UIViewController {
     // holding screen that requires long press to enter experiment so that we can set up the game and subject info before the subject arrives and leave it in this state until they're ready to participate
     override func viewDidLoad() {
         super.viewDidLoad()
-        OrangeMonkey.hidden = true
-        PurpleMonkey.hidden = true
-        gestureInstruction.text = "press and hold to enter"
+        gestureInstruction.text = "two-finger double-tap to enter"
         gestureInstruction.hidden = false
-        tapGestureRecognizer.enabled = false
-        longPressRecognizer.enabled = true
+        tapGestureRecognizer.enabled = true
+        tapGestureRecognizer.numberOfTouchesRequired = 2
+        tapGestureRecognizer.numberOfTapsRequired = 2
     }
     
     

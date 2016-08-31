@@ -245,6 +245,7 @@ class ResponseController : UIViewController {
         collision.translatesReferenceBoundsIntoBoundary = true //containing view acts as boundary
         collision.addBoundaryWithIdentifier("barrier1", forPath: UIBezierPath(ovalInRect: monkey1.frame))
         collision.addBoundaryWithIdentifier("barrier2", forPath: UIBezierPath(ovalInRect: monkey2.frame))
+        collision.addBoundaryWithIdentifier("toolbar", fromPoint: CGPointMake(self.navigationController!.toolbar.frame.origin.x, self.navigationController!.toolbar.frame.origin.y - 20), toPoint: CGPointMake(self.navigationController!.toolbar.frame.origin.x + self.navigationController!.toolbar.frame.size.width, self.navigationController!.toolbar.frame.origin.y - 20))
         
         elasticity = UIDynamicItemBehavior(items: [bananas])
         elasticity.elasticity = 0.6 //control bounciness! (<1 -> loses velocity each bounce)

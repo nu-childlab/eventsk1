@@ -100,10 +100,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey orange.png" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-lk-QMs">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey orange.png" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-lk-QMs">
                                             <rect key="frame" x="-22" y="200" width="244" height="200"/>
                                         </imageView>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-9s-y6a">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-9s-y6a">
                                             <rect key="frame" x="378" y="200" width="244" height="200"/>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3M-fD-Vnx">
@@ -127,7 +127,6 @@
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="NQJ-1k-dWP" appends="YES" id="0ra-s4-ebb"/>
-                                                    <outletCollection property="gestureRecognizers" destination="MZb-ah-npe" appends="YES" id="VCN-mw-60F"/>
                                                 </connections>
                                             </view>
                                             <vibrancyEffect>
@@ -162,7 +161,6 @@
                         <outlet property="OrangeMonkey" destination="1nP-lk-QMs" id="gGh-dT-bOo"/>
                         <outlet property="PurpleMonkey" destination="ReA-9s-y6a" id="BTM-RE-sAS"/>
                         <outlet property="gestureInstruction" destination="8ZR-iC-FiU" id="Tzs-F0-l87"/>
-                        <outlet property="longPressRecognizer" destination="MZb-ah-npe" id="dJ1-gj-DWF"/>
                         <outlet property="tapGestureRecognizer" destination="NQJ-1k-dWP" id="dFt-oU-UfK"/>
                     </connections>
                 </viewController>
@@ -172,11 +170,6 @@
                         <segue destination="zWy-HH-ZT0" kind="show" identifier="tobeginPlayVideo" id="SkM-Zy-UaZ"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="MZb-ah-npe">
-                    <connections>
-                        <action selector="beginGame:" destination="JMY-5m-L0z" id="dAI-rO-iON"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1985" y="-328"/>
         </scene>
@@ -205,15 +198,18 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9V-aJ-gmt">
-                                            <rect key="frame" x="222" y="351" width="157" height="79"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="66"/>
+                                            <rect key="frame" x="80" y="357" width="440" height="66"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="440" id="JbE-of-Pu2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qv-hd-h2A">
-                                            <rect key="frame" x="0.0" y="-21" width="601" height="601"/>
+                                            <rect key="frame" x="0.0" y="-21" width="600" height="601"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bPa-aw-I3D">
-                                                <rect key="frame" x="0.0" y="0.0" width="601" height="601"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="601"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap anywhere to continue " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31J-HZ-bMm">
@@ -223,8 +219,16 @@
                                                         <nil key="highlightedColor"/>
                                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍌🍌🍌🍌🍌🍌🍌🍌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYU-9l-ePn">
+                                                        <rect key="frame" x="80" y="378" width="440" height="66"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="qYU-9l-ePn" firstAttribute="centerX" secondItem="bPa-aw-I3D" secondAttribute="centerX" id="DNW-NQ-Ybw"/>
+                                                    <constraint firstItem="qYU-9l-ePn" firstAttribute="centerY" secondItem="bPa-aw-I3D" secondAttribute="centerY" constant="110" id="TzE-i4-sSP"/>
                                                     <constraint firstAttribute="bottom" secondItem="31J-HZ-bMm" secondAttribute="bottom" constant="55" id="VRP-Zf-cdC"/>
                                                     <constraint firstItem="31J-HZ-bMm" firstAttribute="centerX" secondItem="bPa-aw-I3D" secondAttribute="centerX" id="dsP-Sf-KYh"/>
                                                 </constraints>
