@@ -185,7 +185,18 @@ class ResponseController : UIViewController {
             selectedButton = "NA"
         }
         
-        revealObjectAnimated()
+      if bananas != nil {
+            //  timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResponseController.capturePosition), userInfo: nil, repeats: true) //check every .1 seconds if banana moving by calling capturePosition()
+            bananas.hidden = false
+            addBananaPhysics()
+            let seconds = 4.5
+            let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("tocontinuePlayVideo", sender: self)
+            })
+        }
     }
     
     
@@ -207,32 +218,6 @@ class ResponseController : UIViewController {
                                     sender.transform =
                                     CGAffineTransformIdentity}
             , completion: nil)
-        }
-    
-    func revealObjectAnimated() {
-        if bananas != nil {
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResponseController.capturePosition), userInfo: nil, repeats: true) //check every .1 seconds if banana moving by calling capturePosition()
-            bananas.hidden = false
-            addBananaPhysics()
-        }
-    }
-    
-    //to check if UIObject still moving (if not, trigger segue)
-    func capturePosition() {
-        let position = bananas.center.y
-        posn.insert(position, atIndex: t)
-        
-        loop: if ((t % 5) == 0) {
-            for n in 1 ..< 4 {
-                if (posn[t] - posn[t-n] == 0 ){
-                } else {
-                    break loop
-                }
-            }
-            timer.invalidate()
-            self.performSegueWithIdentifier("tocontinuePlayVideo", sender: self)
-        }
-        t+=1
     }
     
     
@@ -252,7 +237,7 @@ class ResponseController : UIViewController {
         collision.addBoundaryWithIdentifier("toolbar", fromPoint: CGPointMake(self.navigationController!.toolbar.frame.origin.x, self.navigationController!.toolbar.frame.origin.y - 20), toPoint: CGPointMake(self.navigationController!.toolbar.frame.origin.x + self.navigationController!.toolbar.frame.size.width, self.navigationController!.toolbar.frame.origin.y - 20))
         
         elasticity = UIDynamicItemBehavior(items: [bananas])
-        elasticity.elasticity = 0.6 //control bounciness! (<1 -> loses velocity each bounce)
+        elasticity.elasticity =  0.6 //control bounciness! (<1 -> loses velocity each bounce)
     
         //add to animator
         animator.addBehavior(gravity)
@@ -311,8 +296,25 @@ class ResponseController : UIViewController {
 }
 
 
-/*resources for cool banana dynamics
- http://matthewpalmer.net/blog/2015/05/11/wwdc-student-scholarship-uikit-dynamics-swift-animated-device-rotation/
- https://www.raywenderlich.com/76147/uikit-dynamics-tutorial-swift
- https://omarfouad.com/blog/2014/08/02/getting-started-uikitdynamics-swift/
+/* unused
+ // check every .1 seconds if banana at rest by calling capturePosition()//////
+ timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResponseController.capturePosition), userInfo: nil, repeats: true)
+
+//to check if UIObject still moving (if not, trigger segue)
+func capturePosition() {
+    let position = bananas.center.y
+    posn.insert(position, atIndex: t)
+    
+    loop: if ((t % 5) == 0) {
+        for n in 1 ..< 4 {
+            if (posn[t] - posn[t-n] == 0 ){
+            } else {
+                break loop
+            }
+        }
+        timer.invalidate()
+        self.performSegueWithIdentifier("tocontinuePlayVideo", sender: self)
+    }
+    t+=1
+}
  */
