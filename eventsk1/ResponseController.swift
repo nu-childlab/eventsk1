@@ -184,7 +184,7 @@ class ResponseController : UIViewController {
         default:
             selectedButton = "NA"
         }
-        
+        replayVideo.enabled = false
       if bananas != nil {
             //  timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResponseController.capturePosition), userInfo: nil, repeats: true) //check every .1 seconds if banana moving by calling capturePosition()
             bananas.hidden = false
@@ -218,6 +218,7 @@ class ResponseController : UIViewController {
                                     sender.transform =
                                     CGAffineTransformIdentity}
             , completion: nil)
+        sender.enabled = false
     }
     
     
