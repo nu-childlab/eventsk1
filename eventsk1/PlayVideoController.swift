@@ -64,7 +64,8 @@ class PlayVideoController : UIViewController, UINavigationControllerDelegate {
         //setup
         path = array[index]
         url = NSURL.fileURLWithPath(path as! String)
-        print("playing \(url.lastPathComponent!)")
+        print("playing \(url.lastPathComponent!)") //to console
+        NSLog("playing \(url.lastPathComponent!)") //to aux file
         item = AVPlayerItem (URL: url)
         player = AVPlayer(playerItem: item)
         

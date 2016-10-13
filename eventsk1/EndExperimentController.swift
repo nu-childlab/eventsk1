@@ -62,6 +62,11 @@ class EndExperimentController : UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         bounceMonkeys()
+        
+        NSLog("Monkey1: tag 1")
+        NSLog("Monkey2: tag 2")
+        NSLog("No Response: tag 3")
+        NSLog("experiment terminated successfully")
     }
     
 }

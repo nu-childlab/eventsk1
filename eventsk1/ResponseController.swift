@@ -126,6 +126,7 @@ class ResponseController : UIViewController {
                 playVideo(i, array: stim.order2)
             }
         }
+        NSLog("replay requested")
     }
     
     func playVideo(index: Int, array: [NSObject]){
@@ -184,7 +185,9 @@ class ResponseController : UIViewController {
         default:
             selectedButton = "NA"
         }
+        NSLog("participant selected: \(sender.tag)")
         replayVideo.enabled = false
+        
       if bananas != nil {
             //  timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResponseController.capturePosition), userInfo: nil, repeats: true) //check every .1 seconds if banana moving by calling capturePosition()
             bananas.hidden = false

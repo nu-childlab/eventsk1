@@ -130,7 +130,8 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
         //set this as the configuration used at the default location
         Realm.Configuration.defaultConfiguration = config
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!) //prints database filepath to the console (simulator)
+        print(Realm.Configuration.defaultConfiguration.fileURL!) //prints database filepath to the console 
+        NSLog("\n\n\nSubject Number: \(trial.subjectNumber)") //to aux file
         
     }
 
@@ -140,9 +141,23 @@ class WelcomeController: UIViewController, UIAlertViewDelegate {
     
     //MARK: View Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        redirectLogToDocuments() //from this point forward
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         bounceMonkeys()
+    }
+    
+    func redirectLogToDocuments() {
+        
+        let allPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = allPaths.first!
+        let pathForLog = documentsDirectory.stringByAppendingString("/logFile.txt")
+        
+        freopen(pathForLog.cStringUsingEncoding(NSASCIIStringEncoding)!, "a+", stderr)
     }
     
     
