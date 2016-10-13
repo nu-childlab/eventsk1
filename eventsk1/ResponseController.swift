@@ -263,6 +263,10 @@ class ResponseController : UIViewController {
         
         //animator for everything
         animator = UIDynamicAnimator(referenceView: view)
+       
+        //only select one button
+        monkey1.exclusiveTouch = true
+        monkey2.exclusiveTouch = true
         
     }
     
