@@ -46,9 +46,9 @@ class ResponseBackground: UIView {
         let topRight = CGPoint(x: self.bounds.width, y:0)
         let bottomLeft = CGPoint(x: 0, y:self.bounds.height)
         
-        CGContextDrawLinearGradient(currentContext, colorGradient, bottomRight, topRight, [])
-        CGContextDrawLinearGradient(currentContext, shadowGradient, topLeft, bottomRight, [])
-        CGContextDrawLinearGradient(currentContext, shadowGradient2, topRight, bottomLeft, [])
+        CGContextDrawLinearGradient(currentContext!, colorGradient!, bottomRight, topRight, [])
+        CGContextDrawLinearGradient(currentContext!, shadowGradient!, topLeft, bottomRight, [])
+        CGContextDrawLinearGradient(currentContext!, shadowGradient2!, topRight, bottomLeft, [])
     }
     
 }
